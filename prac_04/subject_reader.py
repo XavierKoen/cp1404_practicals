@@ -9,6 +9,7 @@ FILENAME = "subject_data.txt"
 def main():
     data = get_data()
     print(data)
+    formatted_data = format_data(data)
 
 
 def get_data():
@@ -28,5 +29,9 @@ def get_data():
     input_file.close()
     return list_of_data
 
+
+def format_data(data_groups):
+    for data_group in data_groups:
+        print("{:6} is taught by {:12} and has {:3} students".format(data_group[0], data_group[1], data_group[2]))
 
 main()
