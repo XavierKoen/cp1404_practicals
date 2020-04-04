@@ -10,7 +10,9 @@ def main():
     The counted results are received and displayed.
     """
     list_of_words = input("Text: ").split()  # Turns string into list of words.
-    print(word_occurrence_counter(list_of_words))  # Print received dictionary as test.
+    word_occurrence_dict = word_occurrence_counter(list_of_words)
+    for word, occurrence in word_occurrence_dict.items():
+        print("{} : {}".format(word, occurrence))
 
 
 def word_occurrence_counter(words):
