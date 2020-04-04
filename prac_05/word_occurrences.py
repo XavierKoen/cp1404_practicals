@@ -11,8 +11,13 @@ def main():
     """
     list_of_words = input("Text: ").split()  # Turns string into list of words.
     word_occurrence_dict = word_occurrence_counter(list_of_words)
-    for word, occurrence in word_occurrence_dict.items():
-        print("{} : {}".format(word, occurrence))
+    output_alphabetically(word_occurrence_dict)
+
+
+def output_alphabetically(word_occurrence_dict):
+    words_alphabetical = sorted(word_occurrence_dict)
+    for word in words_alphabetical:
+        print("{} : {}".format(word, word_occurrence_dict[word]))
 
 
 def word_occurrence_counter(words):
