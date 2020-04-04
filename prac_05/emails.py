@@ -11,9 +11,15 @@ def main():
     Store email and name as dictionary.
     Return all names with respective emails.
     """
+    email_to_name = {}
     email_address = input("Email: ")
-    name = identify_name(email_address)
-    print(name, email_address)  # Print to test if working.
+    while email_address != "":  # Stop asking for emails once user enters blank ("") input.
+        name = identify_name(email_address)
+        email_to_name[email_address] = name  # Set specific name as value for specific email address key.
+        email_address = input("Email: ")
+    print()
+    for email, name in email_to_name.items():
+        print("{} ({})".format(name, email))
 
 
 def identify_name(email_address):
@@ -25,7 +31,7 @@ def identify_name(email_address):
     # the first element and the rest of the address as the second (removing the @ symbol).
     name = ' '.join(email_split_at_name[0].split('.')).title()  # Replace potential '.' with ' ' within name and
     # capitalise name.
-    is_name_correct = input("Is {} your name? (Y/n) ".format(name)).lower()  # Allow user to check if name is correct.
+    is_name_correct = input("Is your name {}? (Y/n) ".format(name)).lower()  # Allow user to check if name is correct.
     if is_name_correct in ['no', 'n']:
         name = input("Name: ")
     return name
