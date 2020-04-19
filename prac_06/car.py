@@ -6,7 +6,7 @@ class Car:
 
     def __init__(self, name='', fuel=0):
         """Initialise a Car instance.
-
+        name: string, name of car object
         fuel: float, one unit of fuel drives one kilometre
         """
         self.name = name
