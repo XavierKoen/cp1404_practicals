@@ -6,7 +6,7 @@ import random
 
 
 class UnreliableCar(Car):
-    """Specialised version of car with added reliability attribute."""
+    """Specialised version of Car with added reliability attribute."""
 
     def __init__(self, name, fuel, reliability):
         Car.__init__(self, name, fuel)
