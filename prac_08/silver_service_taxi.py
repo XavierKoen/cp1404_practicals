@@ -17,7 +17,6 @@ class SilverServiceTaxi(Taxi):
         """Return a string like a Taxi but with flagfall appended."""
         return "{} plus flagfall of ${:.2f}".format(super().__str__(), self.flagfall)
 
-
     def get_fare(self):
         """Get fare like parent Taxi but include flagfall cost."""
         fare = Taxi.get_fare(self) + self.flagfall
