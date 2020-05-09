@@ -11,7 +11,7 @@ def main():
     """Initialise available taxis and constructs menu."""
     current_taxi = None
     current_bill = 0
-    taxis = [Taxi("Prius", 100), SilverServiceTaxi("Limo", 100, 2), SilverServiceTaxi("Hummer", 100, 4)]
+    taxis = [Taxi("Prius", 100), SilverServiceTaxi("Limo", 100, 2), SilverServiceTaxi("Hummer", 200, 4)]
     print("Let's drive!")
     menu_selection = ''
     while menu_selection != 'q':
@@ -19,24 +19,26 @@ def main():
         menu_selection = input(">>> ")
         if menu_selection == 'c':
             current_taxi = choose_taxi(taxis)
+            print("Bill to date: ${:.2f}".format(current_bill))
         elif menu_selection == 'd':
             try:
                 cost_of_trip = commence_trip(current_taxi)
-                print("Your {} trip cost you ${}".format(current_taxi.name, cost_of_trip))
+                print("Your {} trip cost you ${:.2f}".format(current_taxi.name, cost_of_trip))
                 current_bill += cost_of_trip
+                print("Bill to date: ${:.2f}".format(current_bill))
             except AttributeError:
                 print("Please choose a taxi first.")
         elif menu_selection == 'q':
-            pass
+            print("Total trip cost: ${:.2f}\nTaxis are now:".format(current_bill))
+            list_taxis(taxis)
         else:
-            pass
-        print("Bill to date: ${:.2f}".format(current_bill))
+            print("Please select a valid menu option:")
 
 
 def choose_taxi(taxis):
     """List available taxis and allow user to select one."""
     print("Taxis available:")
-    [print("{} - {}".format(taxis.index(taxi), taxi)) for taxi in taxis]
+    list_taxis(taxis)
     valid_taxi_index = False
     while not valid_taxi_index:
         try:
@@ -44,7 +46,14 @@ def choose_taxi(taxis):
             valid_taxi_index = True
             return chosen_taxi
         except IndexError:
+            print("Number is out of range! Please enter a valid taxi index number.")
+        except ValueError:
             print("Invalid input! Please enter a valid taxi index number.")
+
+
+def list_taxis(taxis):
+    """List taxis."""
+    [print("{} - {}".format(taxis.index(taxi), taxi)) for taxi in taxis]
 
 
 def commence_trip(current_taxi):
