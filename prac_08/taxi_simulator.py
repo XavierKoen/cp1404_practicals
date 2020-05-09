@@ -8,22 +8,38 @@ from prac_08.silver_service_taxi import SilverServiceTaxi
 
 
 def main():
+    """Initialise available taxis and constructs menu."""
     current_taxi = None
+    current_bill = 0
     taxis = [Taxi("Prius", 100), SilverServiceTaxi("Limo", 100, 2), SilverServiceTaxi("Hummer", 100, 4)]
-    print("Let's drive!\nq)uit, c)hoose taxi, d)rive")
-    menu_selection = input(">>> ")
-    if menu_selection == 'c':
-        pass
-        # current_taxi = choose_taxi()
-    elif menu_selection == 'd':
-        pass
-    elif menu_selection == 'q':
-        pass
-    else:
-        pass
+    print("Let's drive!")
+    menu_selection = ''
+    while menu_selection != 'q':
+        print("q)uit, c)hoose taxi, d)rive")
+        menu_selection = input(">>> ")
+        if menu_selection == 'c':
+            current_taxi = choose_taxi(taxis)
+        elif menu_selection == 'd':
+            pass
+        elif menu_selection == 'q':
+            pass
+        else:
+            pass
+        print("Bill to date: ${:.2f}".format(current_bill))
 
 
-# def choose_taxi():
+def choose_taxi(taxis):
+    """List available taxis and allow user to select one."""
+    print("Taxis available:")
+    [print("{} - {}".format(taxis.index(taxi), taxi)) for taxi in taxis]
+    valid_taxi_index = False
+    while not valid_taxi_index:
+        try:
+            chosen_taxi = taxis[int(input("Choose taxi: "))]
+            valid_taxi_index = True
+        except IndexError:
+            print("Invalid input! Please enter a valid taxi index number.")
+    return chosen_taxi
 
 
 main()
