@@ -20,7 +20,12 @@ def main():
         if menu_selection == 'c':
             current_taxi = choose_taxi(taxis)
         elif menu_selection == 'd':
-            pass
+            try:
+                cost_of_trip = commence_trip(current_taxi)
+                print("Your {} trip cost you ${}".format(current_taxi.name, cost_of_trip))
+                current_bill += cost_of_trip
+            except AttributeError:
+                print("Please choose a taxi first.")
         elif menu_selection == 'q':
             pass
         else:
@@ -37,9 +42,17 @@ def choose_taxi(taxis):
         try:
             chosen_taxi = taxis[int(input("Choose taxi: "))]
             valid_taxi_index = True
+            return chosen_taxi
         except IndexError:
             print("Invalid input! Please enter a valid taxi index number.")
-    return chosen_taxi
+
+
+def commence_trip(current_taxi):
+    """Drive taxi desired distance and update bill based on fare."""
+    current_taxi.start_fare()
+    current_taxi.drive(float(input("Drive how far? ")))
+    cost = current_taxi.get_fare()
+    return cost
 
 
 main()
