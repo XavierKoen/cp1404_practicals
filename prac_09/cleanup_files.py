@@ -40,6 +40,8 @@ def get_fixed_filename(filename):
         if skip_next_char:
             skip_next_char = False
             pass
+        elif i == 0 and char.islower():
+            new_filename += char.upper()
         elif char == ' ':
             next_char_upper = filename[i + 1].upper()
             new_filename = new_filename + ' ' + next_char_upper
