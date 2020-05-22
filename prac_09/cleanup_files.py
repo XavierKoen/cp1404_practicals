@@ -44,8 +44,18 @@ def get_fixed_filename(filename):
             new_filename += char.upper()
         elif char == ' ':
             next_char_upper = filename[i + 1].upper()
-            new_filename = new_filename + ' ' + next_char_upper
-            skip_next_char = True
+            new_filename = new_filename + '_' + next_char_upper
+            if filename[i + 1] == '_':
+                pass
+            else:
+                skip_next_char = True
+        elif char == '(':
+            next_char_upper = filename[i + 1].upper()
+            new_filename = new_filename + '(' + next_char_upper
+            if filename[i + 1] == ' ':
+                pass
+            else:
+              skip_next_char = True
         elif i != 0 and char.isupper() and filename[i - 1].islower():
             new_filename = new_filename + '_' + char
         else:
@@ -63,11 +73,13 @@ def demo_walk():
         print("\tand files:", filenames)
         print("(Current working directory is: {})".format(os.getcwd()))
 
-        # for filename in filenames:
         for filename in filenames:
-            full_filename = os.path.join(directory_name, filename)
-            new_filename = os.path.join(directory_name, get_fixed_filename(filename))
-            os.rename(full_filename, new_filename)
+            try:
+                full_filename = os.path.join(directory_name, filename)
+                new_filename = os.path.join(directory_name, get_fixed_filename(filename))
+                os.rename(full_filename, new_filename)
+            except FileExistsError:
+                pass
 
 
 # main()
