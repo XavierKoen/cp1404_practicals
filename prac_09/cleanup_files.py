@@ -44,23 +44,27 @@ def get_fixed_filename(filename):
             new_filename += char.upper()
         elif char == ' ':
             next_char_upper = filename[i + 1].upper()
-            new_filename = new_filename + '_' + next_char_upper
-            if filename[i + 1] == '_':
+            new_filename += '_'
+            if filename[i + 1] == '(':
                 pass
             else:
+                new_filename += next_char_upper
                 skip_next_char = True
         elif char == '(':
             next_char_upper = filename[i + 1].upper()
-            new_filename = new_filename + '(' + next_char_upper
+            new_filename += '('
             if filename[i + 1] == ' ':
                 pass
             else:
+                new_filename+= next_char_upper
                 skip_next_char = True
         elif i != 0 and char.isupper() and filename[i - 1].islower():
             new_filename = new_filename + '_' + char
+            if char == 'I' and filename[i + 1].isupper():
+                new_filename += '_'
         else:
             new_filename += char
-    new_name = new_filename.replace(" ", "_").replace(".TXT", ".txt")
+    new_name = new_filename.replace(".TXT", ".txt")
     return new_name
 
 
