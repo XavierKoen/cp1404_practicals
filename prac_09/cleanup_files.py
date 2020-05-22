@@ -55,7 +55,7 @@ def get_fixed_filename(filename):
             if filename[i + 1] == ' ':
                 pass
             else:
-              skip_next_char = True
+                skip_next_char = True
         elif i != 0 and char.isupper() and filename[i - 1].islower():
             new_filename = new_filename + '_' + char
         else:
