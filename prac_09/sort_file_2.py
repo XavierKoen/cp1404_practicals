@@ -4,7 +4,7 @@ import shutil
 
 
 def main():
-    """Sorts files into subdirectories created based on user input"""
+    """Create subdirectories based on user input for file extensions."""
     os.chdir("FilesToSort")
     files = os.listdir('.')
     extension_to_directory = {}
@@ -17,6 +17,12 @@ def main():
             os.mkdir(extension_to_directory[extension])
         except FileExistsError:
             pass
+        move_file(file, extension, extension_to_directory)
+
+
+def move_file(file, extension, extension_to_directory):
+    """Move file to directory based on file extension."""
+    shutil.move(file, extension_to_directory[extension])
 
 
 main()
