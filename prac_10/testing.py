@@ -56,9 +56,9 @@ run_tests()
 # (PyCharm may see your >>> doctest comments and run doctests anyway.)
 doctest.testmod()
 
+
 # (don't change the tests, change the function!)
 
-# TODO: 5. Write and test a function to format a phrase as a sentence,
 # starting with a capital and ending with a single full stop.
 # Important: start with a function header and just use pass as the body
 # then add doctests for 3 tests:
@@ -69,7 +69,7 @@ doctest.testmod()
 # then write the body of the function so that the tests pass
 
 
-def format_as_sentence():
+def format_as_sentence(string):
     """Change the format of a phrase to a sentence (beginning with a capital and finish with a single full stop.
     >>> format_as_sentence('hello')
     'Hello.'
@@ -78,4 +78,9 @@ def format_as_sentence():
     >>> format_as_sentence('Add the car.py file')
     'Add the car.py file.'
     """
-    pass
+    string_list = list(string)
+    string_list[0] = string_list[0].title()
+    string = ''.join(string_list)
+    if string[-1] != '.':
+        string += '.'
+    return string
